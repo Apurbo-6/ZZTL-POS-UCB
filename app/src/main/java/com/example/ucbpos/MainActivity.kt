@@ -20,6 +20,15 @@ import androidx.core.view.WindowCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ucbpos.adapter.SliderAdapter
 
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ucbpos.adapter.HomeMenuAdapter
+import com.example.ucbpos.model.MenuItem
+import com.google.gson.reflect.TypeToken
+
+import android.content.Intent
+import com.example.ucbpos.activities.MoreServiceActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,6 +83,49 @@ class MainActivity : AppCompatActivity() {
             )
 
             imgLogo.setImageResource(logoId)
+
+        }
+        // Load Menu JSON
+        val menuJson = JsonUtils.loadJSONFromAsset(this, "menu.json")
+
+        if (menuJson != null) {
+
+            val listType = object : TypeToken<List<MenuItem>>() {}.type
+
+            val menuList: List<MenuItem> =
+                Gson().fromJson(menuJson, listType)
+
+            // Show only items for Home Screen
+            val homeMenu = menuList.filter {
+                it.isShow && it.isShowInHome
+            }
+
+            val recyclerView = findViewById<RecyclerView>(R.id.rvHomeMenu)
+
+            recyclerView.layoutManager = GridLayoutManager(this, 2)
+
+            recyclerView.adapter = HomeMenuAdapter(
+                this,
+                homeMenu
+            ) { menu ->
+
+                when(menu.title){
+
+                    "More" -> {
+
+                        startActivity(
+                            Intent(
+                                this,
+                                MoreServiceActivity::class.java
+                            )
+                        )
+                    }
+
+                    else -> {
+
+                    }
+                }
+            }
         }
 
 

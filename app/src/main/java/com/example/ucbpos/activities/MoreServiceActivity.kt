@@ -1,4 +1,63 @@
 package com.example.ucbpos.activities
 
-class MoreServiceActivity {
+import android.os.Bundle
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ucbpos.R
+import com.example.ucbpos.adapter.HomeMenuAdapter
+import com.example.ucbpos.model.MenuItem
+import com.example.ucbpos.utils.JsonUtils
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+class MoreServiceActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        @Suppress("DEPRECATION")
+        window.statusBarColor = ContextCompat.getColor(this, R.color.ucb_red)
+
+        @Suppress("DEPRECATION")
+        window.navigationBarColor = ContextCompat.getColor(this, R.color.ucb_red)
+
+
+        setContentView(R.layout.activity_more_service)
+        findViewById<ImageView>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
+
+        loadMoreMenu()
+    }
+
+    private fun loadMoreMenu() {
+
+        val menuJson = JsonUtils.loadJSONFromAsset(this, "menu.json") ?: return
+
+        val listType = object : TypeToken<List<MenuItem>>() {}.type
+
+        val menuList: List<MenuItem> =
+            Gson().fromJson(menuJson, listType)
+
+        val moreMenu = menuList.filter {
+
+            it.isShow && !it.isShowInHome
+
+        }
+
+        val recyclerView = findViewById<RecyclerView>(R.id.rvMoreMenu)
+
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+
+        recyclerView.adapter = HomeMenuAdapter(
+            this,
+            moreMenu
+        ) {
+
+            // Click later
+
+        }
+    }
 }
