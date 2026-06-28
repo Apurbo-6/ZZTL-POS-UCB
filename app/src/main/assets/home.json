@@ -1,0 +1,22 @@
+{
+  "logo": "bank_logo",
+  "appName": "UCBPLC",
+  "appNameSubTitle": "INTERNAL TEST",
+  "sliderMedia": [
+    {
+      "title": "Slider 1",
+      "mediaType": "png",
+      "mediaLink": "banner1"
+    },
+    {
+      "title": "Slider 2",
+      "mediaType": "png",
+      "mediaLink": "banner2"
+    },
+    {
+      "title": "Slider 3",
+      "mediaType": "png",
+      "mediaLink": "banner3"
+    }
+  ]
+}

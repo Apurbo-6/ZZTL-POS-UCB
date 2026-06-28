@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Sale",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?1",
+    "isShowInHome": false,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 2,
+    "title": "Void",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?2",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 3,
+    "title": "Settlement",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?3",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 4,
+    "title": "Logon",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?4",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 5,
+    "title": "More",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?5",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 6,
+    "title": "Print",
+    "subTitle": "",
+    "icon": "https://picsum.photos/100?6",
+    "isShowInHome": false,
+    "isShow": true,
+    "isEnable": true
+  }
+]
