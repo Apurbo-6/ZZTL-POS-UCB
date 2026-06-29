@@ -52,6 +52,33 @@
     "isShowInHome": false,
     "isShow": true,
     "isEnable": true
+  },
+  {
+    "id": 7,
+    "title": "EMI",
+    "subTitle": "",
+    "icon": "emi",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 8,
+    "title": "Tip Adjust",
+    "subTitle": "",
+    "icon": "tip_adjust",
+    "isShowInHome": true,
+    "isShow": true,
+    "isEnable": true
+  },
+  {
+    "id": 9,
+    "title": "Balance INQ",
+    "subTitle": "",
+    "icon": "balance_inq",
+    "isShowInHome": false,
+    "isShow": true,
+    "isEnable": true
   }
 
 

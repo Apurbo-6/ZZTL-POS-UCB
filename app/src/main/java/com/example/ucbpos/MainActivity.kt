@@ -96,9 +96,38 @@ class MainActivity : AppCompatActivity() {
                 Gson().fromJson(menuJson, listType)
 
             // Show only items for Home Screen
-            val homeMenu = menuList.filter {
-                it.isShow && it.isShowInHome
+//            val homeMenu = menuList.filter {
+//                it.isShow && it.isShowInHome
+//            }
+
+            // Get all visible home items
+            val visibleHomeMenu = menuList.filter {
+                it.isShow && it.isEnable && it.isShowInHome
             }
+
+// Show only first 3
+            val homeMenu = visibleHomeMenu
+                .take(3)
+                .toMutableList()
+
+// If there are more than 3 items, add More button
+            if (visibleHomeMenu.size > 3) {
+
+                homeMenu.add(
+                    MenuItem(
+                        id = -1,
+                        title = "More",
+                        subTitle = "",
+                        icon = "more",
+                        isShowInHome = true,
+                        isShow = true,
+                        isEnable = true
+                    )
+                )
+            }
+
+
+
 
             val recyclerView = findViewById<RecyclerView>(R.id.rvHomeMenu)
 

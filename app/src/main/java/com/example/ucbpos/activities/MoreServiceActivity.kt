@@ -41,11 +41,32 @@ class MoreServiceActivity : AppCompatActivity() {
         val menuList: List<MenuItem> =
             Gson().fromJson(menuJson, listType)
 
-        val moreMenu = menuList.filter {
+//        val moreMenu = menuList.filter {
+//
+//            it.isShow && !it.isShowInHome
+//
+//        }
 
-            it.isShow && !it.isShowInHome
-
+        // All visible menu items
+        val visibleMenu = menuList.filter {
+            it.isShow && it.isEnable
         }
+
+    // Home items
+        val homeItems = visibleMenu.filter {
+            it.isShowInHome
+        }
+
+    // Items after the first 3 home items
+        val remainingHomeItems = homeItems.drop(3)
+
+    // Items that should only appear in More Services
+        val moreOnlyItems = visibleMenu.filter {
+            !it.isShowInHome
+        }
+
+    // Final list
+        val moreMenu = remainingHomeItems + moreOnlyItems
 
         val recyclerView = findViewById<RecyclerView>(R.id.rvMoreMenu)
 
