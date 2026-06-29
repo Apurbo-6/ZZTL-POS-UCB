@@ -13,6 +13,13 @@ import com.example.ucbpos.utils.JsonUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+import com.example.ucbpos.api.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
+
 class MoreServiceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,53 +39,122 @@ class MoreServiceActivity : AppCompatActivity() {
         loadMoreMenu()
     }
 
-    private fun loadMoreMenu() {
-
-        val menuJson = JsonUtils.loadJSONFromAsset(this, "menu.json") ?: return
-
-        val listType = object : TypeToken<List<MenuItem>>() {}.type
-
-        val menuList: List<MenuItem> =
-            Gson().fromJson(menuJson, listType)
-
-//        val moreMenu = menuList.filter {
+//    private fun loadMoreMenu() {
 //
-//            it.isShow && !it.isShowInHome
+//        val menuJson = JsonUtils.loadJSONFromAsset(this, "menu.json") ?: return
+//
+//        val listType = object : TypeToken<List<MenuItem>>() {}.type
+//
+//        val menuList: List<MenuItem> =
+//            Gson().fromJson(menuJson, listType)
+//
+////        val moreMenu = menuList.filter {
+////
+////            it.isShow && !it.isShowInHome
+////
+////        }
+//
+//        // All visible menu items
+//        val visibleMenu = menuList.filter {
+//            it.isShow && it.isEnable
+//        }
+//
+//    // Home items
+//        val homeItems = visibleMenu.filter {
+//            it.isShowInHome
+//        }
+//
+//    // Items after the first 3 home items
+////        val remainingHomeItems = homeItems.drop(3)
+//        val remainingHomeItems = homeItems
+//            .drop(3)
+//            .filter { it.id != -1 }
+//
+//    // Items that should only appear in More Services
+//        val moreOnlyItems = visibleMenu.filter {
+//            !it.isShowInHome
+//        }
+//
+//    // Final list
+//        val moreMenu = remainingHomeItems + moreOnlyItems
+//
+//        val recyclerView = findViewById<RecyclerView>(R.id.rvMoreMenu)
+//
+//        recyclerView.layoutManager = GridLayoutManager(this, 2)
+//
+//        recyclerView.adapter = HomeMenuAdapter(
+//            this,
+//            moreMenu
+//        ) {
+//
+//            // Click later
 //
 //        }
+//    }
 
-        // All visible menu items
-        val visibleMenu = menuList.filter {
-            it.isShow && it.isEnable
-        }
 
-    // Home items
-        val homeItems = visibleMenu.filter {
-            it.isShowInHome
-        }
+    private fun loadMoreMenu() {
 
-    // Items after the first 3 home items
-        val remainingHomeItems = homeItems.drop(3)
+        RetrofitClient.api.getMenu().enqueue(object : Callback<List<MenuItem>> {
 
-    // Items that should only appear in More Services
-        val moreOnlyItems = visibleMenu.filter {
-            !it.isShowInHome
-        }
+            override fun onResponse(
+                call: Call<List<MenuItem>>,
+                response: Response<List<MenuItem>>
+            ) {
 
-    // Final list
-        val moreMenu = remainingHomeItems + moreOnlyItems
+                if (response.isSuccessful && response.body() != null) {
 
-        val recyclerView = findViewById<RecyclerView>(R.id.rvMoreMenu)
+                    val menuList = response.body()!!
 
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
+                    // All visible menu items
+                    val visibleMenu = menuList.filter {
+                        it.isShow && it.isEnable
+                    }
 
-        recyclerView.adapter = HomeMenuAdapter(
-            this,
-            moreMenu
-        ) {
+                    // Home items
+                    val homeItems = visibleMenu.filter {
+                        it.isShowInHome
+                    }
 
-            // Click later
+                    // Remaining Home items after first 3
+                    val remainingHomeItems = homeItems.drop(3)
 
-        }
+                    // Items only for More Services
+                    val moreOnlyItems = visibleMenu.filter {
+                        !it.isShowInHome
+                    }
+
+                    // Final list
+                    val moreMenu = remainingHomeItems + moreOnlyItems
+
+                    val recyclerView = findViewById<RecyclerView>(R.id.rvMoreMenu)
+
+                    recyclerView.layoutManager = GridLayoutManager(this@MoreServiceActivity, 2)
+
+                    recyclerView.adapter = HomeMenuAdapter(
+                        this@MoreServiceActivity,
+                        moreMenu
+                    ) { menu ->
+
+                        // Future click actions
+
+                    }
+                }
+            }
+
+            override fun onFailure(
+                call: Call<List<MenuItem>>,
+                t: Throwable
+            ) {
+
+                android.util.Log.e("MENU_API", t.message ?: "Unknown Error", t)
+            }
+        })
     }
+
+
+
+
+
+
 }

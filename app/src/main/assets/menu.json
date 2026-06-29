@@ -37,9 +37,9 @@
   },
   {
     "id": 5,
-    "title": "More",
+    "title": "Help Center",
     "subTitle": "",
-    "icon": "more",
+    "icon": "help_center",
     "isShowInHome": true,
     "isShow": true,
     "isEnable": true
