@@ -4,34 +4,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:layout_margin="6dp"
+    android:layout_height="@dimen/menu_card_height"
+    android:layout_margin="@dimen/menu_card_margin"
 
     app:cardBackgroundColor="@android:color/white"
     app:strokeColor="@color/ucb_red"
-    app:strokeWidth="1dp"
-    app:cardCornerRadius="10dp">
+    app:strokeWidth="@dimen/menu_card_stroke_width"
+    app:cardCornerRadius="@dimen/menu_card_corner_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgMenuIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/voidd"/>
+            android:layout_width="@dimen/menu_icon_size"
+            android:layout_height="@dimen/menu_icon_size"
+            android:src="@drawable/voidd" />
 
         <TextView
             android:id="@+id/txtMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/menu_title_margin_top"
             android:text="Void"
             android:textColor="#000000"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/menu_title_size" />
 
     </LinearLayout>
 

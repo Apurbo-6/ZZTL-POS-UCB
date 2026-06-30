@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
 
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/main"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/screen_padding_vertical"
+    android:paddingHorizontal="@dimen/screen_padding_horizontal">
 
+    <!-- Logo -->
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <!--qr code -->
+    <!-- QR Code -->
     <ImageView
         android:id="@+id/imgQR"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="@dimen/qr_size"
+        android:layout_height="@dimen/qr_size"
         android:src="@drawable/qr_code"
 
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/imgLogo"
-        app:layout_constraintBottom_toBottomOf="@id/imgLogo"/>
+        app:layout_constraintBottom_toBottomOf="@id/imgLogo"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-
-
-
+    <!-- Company Title -->
     <LinearLayout
         android:id="@+id/titleLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="2dp"
-
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp"
-        android:paddingVertical="20dp"
-        android:background="#F2F2F2"
+        android:gravity="center"
+        android:background="#F5F5F5"
+        android:paddingVertical="@dimen/title_padding_vertical"
+        android:layout_marginTop="@dimen/title_margin_top"
 
         app:layout_constraintTop_toBottomOf="@id/imgLogo"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,62 +52,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UCBPLC"
+            android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
+            android:textSize="@dimen/company_text_size"/>
 
         <TextView
             android:id="@+id/txtSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="INTERNAL TEST"
-            android:textSize="14sp"
             android:textColor="#777777"
-            android:paddingStart="2dp"/>
+            android:textSize="@dimen/subtitle_text_size"
+            android:layout_marginStart="@dimen/title_gap"/>
+
     </LinearLayout>
 
+    <!-- Slider -->
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/viewPagerSlider"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="@dimen/slider_margin_top"-->
+
+<!--        app:layout_constraintDimensionRatio="16:9"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/titleLayout"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerSlider"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/slider_height"
+        android:layout_marginTop="@dimen/slider_margin_top"
 
         app:layout_constraintTop_toBottomOf="@id/titleLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <!-- SALE CARD -->
+    <!-- Sale Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardSale"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
-
-        app:cardBackgroundColor="@color/white"
-        app:strokeColor="@color/ucb_red"
-        app:strokeWidth="3dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        android:layout_height="@dimen/sale_card_height"
+        android:layout_marginTop="@dimen/card_margin_top"
 
         app:layout_constraintTop_toBottomOf="@id/viewPagerSlider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:cardBackgroundColor="@android:color/white"
+        app:strokeColor="@color/ucb_red"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp">
+            android:padding="@dimen/card_padding">
 
             <TextView
                 android:id="@+id/txtSale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SALE"
-                android:textColor="@android:color/black"
+                android:textColor="#000000"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/sale_title_size"/>
 
             <TextView
                 android:id="@+id/txtPrice"
@@ -117,12 +126,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtSale"
                 android:text="TK 0.00"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"/>
+                android:textColor="#000000"
+                android:textSize="@dimen/price_text_size"/>
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/arrow"/>
@@ -131,19 +140,17 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
+    <!-- Home Menu -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHomeMenu"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/menu_margin_top"
+        android:overScrollMode="never"
 
         app:layout_constraintTop_toBottomOf="@id/cardSale"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-

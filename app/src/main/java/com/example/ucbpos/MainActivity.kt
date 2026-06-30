@@ -34,6 +34,9 @@ import retrofit2.Response
 import android.content.Intent
 import com.example.ucbpos.activities.MoreServiceActivity
 
+import android.util.DisplayMetrics
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,6 +56,50 @@ class MainActivity : AppCompatActivity() {
             .isAppearanceLightStatusBars = false
 
         setContentView(R.layout.activity_main)
+
+//        val metrics = DisplayMetrics()
+//        windowManager.defaultDisplay.getMetrics(metrics)
+//
+//        val widthPx = metrics.widthPixels
+//        val heightPx = metrics.heightPixels
+//        val density = metrics.density
+//        val densityDpi = metrics.densityDpi
+//
+//        val widthDp = widthPx / density
+//        val heightDp = heightPx / density
+//
+//        Log.d("SCREEN_INFO", "Width(px): $widthPx")
+//        Log.d("SCREEN_INFO", "Height(px): $heightPx")
+//        Log.d("SCREEN_INFO", "Width(dp): $widthDp")
+//        Log.d("SCREEN_INFO", "Height(dp): $heightDp")
+//        Log.d("SCREEN_INFO", "Density: $density")
+//        Log.d("SCREEN_INFO", "DensityDpi: $densityDpi")
+
+        val metrics = resources.displayMetrics
+
+        Log.d(
+            "DEVICE_INFO",
+            """
+            Brand: ${android.os.Build.BRAND}
+            Model: ${android.os.Build.MODEL}
+            Resolution: ${metrics.widthPixels} x ${metrics.heightPixels}
+            DP: ${(metrics.widthPixels / metrics.density).toInt()} x ${(metrics.heightPixels / metrics.density).toInt()}
+            Density: ${metrics.density}
+            Density DPI: ${metrics.densityDpi}
+            Smallest Width: ${resources.configuration.smallestScreenWidthDp}dp
+            """.trimIndent()
+        )
+
+
+//        val logoSize = resources.getDimension(R.dimen.logo_size)
+//
+//        Log.d("DIMEN_TEST", "Logo Size = $logoSize")
+
+        val px = resources.getDimension(R.dimen.logo_size)
+        val density = resources.displayMetrics.density
+        val dp = px / density
+
+        Log.d("DIMEN_TEST", "Logo = ${dp}dp")
 
 
 
